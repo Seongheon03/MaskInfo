@@ -1,0 +1,30 @@
+﻿<Window x:Class="MaskInfo.ShowDetailInfoWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MaskInfo"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Title="{Binding SelectedDrugstore.Name}" Height="200" Width="549">
+    <Grid>
+        <StackPanel Height="150">
+            <StackPanel Orientation="Horizontal" Margin="10 15 0 0">
+                <Image Source="{Binding SelectedDrugstore.ImageUrl}" Height="30"/>
+                <TextBlock Text="{Binding SelectedDrugstore.Name}" Style="{StaticResource ItemTextblock}" 
+                           FontSize="23" FontWeight="Bold"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="10 12 0 0">
+                <Image Source="/Assets/mask.png" Height="30"/>
+                <TextBlock Text="{Binding SelectedDrugstore.Inventory}" Style="{StaticResource ItemTextblock}"
+                           FontSize="20" Foreground="{Binding SelectedDrugstore.InventoryColor}" FontWeight="Bold"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="10 12 0 0">
+                <Image Source="/Assets/address.png" Height="30"/>
+                <TextBlock Text="{Binding SelectedDrugstore.Addr}" Style="{StaticResource ItemTextblock}"
+                           FontSize="16" Width="460" TextWrapping="Wrap"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

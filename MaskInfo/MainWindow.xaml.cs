@@ -24,5 +24,25 @@ namespace MaskInfo
         {
             InitializeComponent();
         }
+
+        private void btnSearchByDrugstore_Click(object sender, RoutedEventArgs e)
+        {
+            ctrlSearchByDrugstore.Visibility = Visibility.Visible;
+            ctrlSearchByAddress.Visibility = Visibility.Collapsed;
+            App.maskStoreData.storeViewModel.SearchedText = "";
+        }
+
+        private void btnSearchByAddress_Click(object sender, RoutedEventArgs e)
+        {
+            ctrlSearchByDrugstore.Visibility = Visibility.Collapsed;
+            ctrlSearchByAddress.Visibility = Visibility.Visible;
+            App.maskStoreData.storeViewModel.SearchedText = "";
+        }
+
+        private void btnNotice_Click(object sender, RoutedEventArgs e)
+        {
+            Window noticeWindow = new NoticeWindow();
+            noticeWindow.ShowDialog();
+        }
     }
 }

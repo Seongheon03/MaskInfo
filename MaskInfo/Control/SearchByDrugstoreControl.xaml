@@ -1,0 +1,69 @@
+﻿<UserControl x:Class="MaskInfo.Control.SearchByDrugstoreControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MaskInfo"
+             xmlns:loadin="clr-namespace:LoadingIndicators.WPF;assembly=LoadingIndicators.WPF"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="530"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <TextBox Text="{Binding SearchedText, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource SearchBox}"
+                     Tag="약국이름을 입력하세요">
+                <TextBox.InputBindings>
+                    <KeyBinding Command="{Binding SearchByDrugstoreCommand}" Key="Enter"/>
+                </TextBox.InputBindings>
+            </TextBox>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <ListView x:Name="lvDrugstores" ItemsSource="{Binding StoresByDrugstore}"
+                      SelectionChanged="ListView_SelectionChanged"
+                      Width="1180" HorizontalAlignment="Center"
+                      ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="White">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <Border BorderBrush="#166ABA" BorderThickness="2" CornerRadius="20" Width="549" Margin="10 10 10 10">
+                                <StackPanel Height="100" HorizontalAlignment="Center">
+                                    <StackPanel Orientation="Horizontal" Margin="10 15 0 0">
+                                        <Image Source="{Binding ImageUrl}" Height="30"/>
+                                        <TextBlock Text="{Binding Name}" Style="{StaticResource ItemTextblock}" 
+                                                           FontSize="23" FontWeight="Bold"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="10 12 0 0">
+                                        <Image Source="/Assets/address.png" Height="30"/>
+                                        <TextBlock Text="{Binding Addr}" Style="{StaticResource ItemTextblock}"
+                                                           FontSize="16" Width="460" TextWrapping="Wrap"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <TextBlock Text="{Binding TbDrugstoreGuideText}" 
+                       HorizontalAlignment="Center" VerticalAlignment="Center"
+                       Foreground="Gray" FontWeight="Bold" FontSize="30" 
+                       Visibility="{Binding TbDrugstoreGuideVisibility, Converter={StaticResource boolToVisibility}}"/>
+
+            <loadin:LoadingIndicator Grid.RowSpan="2"
+                                     SpeedRatio="1" IsActive="{Binding ProgressRingActivated}" 
+                                     Foreground="RoyalBlue"
+                                     Style="{DynamicResource LoadingIndicatorWaveStyle}"/>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,33 @@
+﻿<Window x:Class="MaskInfo.NoticeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MaskInfo"
+        mc:Ignorable="d"
+        Title="공지 사항" Height="550" Width="600"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Width" Value="570"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Foreground" Value="Gray"/>
+            <Setter Property="FontWeight" Value="Black"/>
+            <Setter Property="Margin" Value="0 30 0 0"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <StackPanel>
+            <TextBlock x:Name="tbPurchaseOrNot" Foreground="#166ABA"/>
+            <TextBlock Text="마스크 구매시 아래 내용을 참고하세요!" Foreground="Black"/>
+            <TextBlock Text="※ 마스크는 주 1인당 2매 구매 가능하며, 1매당 1500원입니다."/>
+            <TextBlock Text="※ 지정된 요일에 구매하지 못한경우 주말에 구매 가능합니다."/>
+            <TextBlock Text="※ 구매 시 주민등록증 등 공인신분증을 지참해주세요."/>
+            <TextBlock Text="※ 대리구매는 만 10세 이하 어린이(2010년 포함 이후 출생),  만 80세 이상 어르신(1940년 포함 그 이전 출생한 어르신),    장애인, 장기요양급여 수급자는 증명서류 지참시 가능합니다."/>
+            <TextBlock Text="※ 대리구매시 증명서류로 본인 신분증, 주민등록본, 복지카드 또는 장애인등록증, 장기요양인정서가 필요합니다."/>
+        </StackPanel>
+    </Grid>
+</Window>

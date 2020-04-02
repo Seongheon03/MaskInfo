@@ -1,0 +1,75 @@
+﻿<UserControl x:Class="MaskInfo.Control.SearchByAddressControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MaskInfo"
+             xmlns:loadin="clr-namespace:LoadingIndicators.WPF;assembly=LoadingIndicators.WPF"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="530"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <TextBox Text="{Binding SearchedText, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource SearchBox}"
+                         Tag="주소를 입력하세요">
+                    <TextBox.InputBindings>
+                        <KeyBinding Command="{Binding SearchByAddressCommand}"  Key="Enter"/>
+                    </TextBox.InputBindings>
+                </TextBox>
+            </Grid>
+
+            <Grid Grid.Row="2">
+                <ScrollViewer>
+                    <ItemsControl ItemsSource="{Binding StoresByAddress}" Width="1180"
+                                  Background="White" HorizontalAlignment="Center"
+                                  ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <Border BorderBrush="#166ABA" BorderThickness="2" CornerRadius="20" Width="539" Margin="30 20 0 0">
+                                        <StackPanel Height="150">
+                                            <StackPanel Orientation="Horizontal" Margin="10 15 0 0">
+                                                <Image Source="{Binding ImageUrl}" Height="30"/>
+                                                <TextBlock Text="{Binding Name}" Style="{StaticResource ItemTextblock}" 
+                                                           FontSize="23" FontWeight="Bold"/>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal" Margin="10 12 0 0">
+                                                <Image Source="/Assets/mask.png" Height="30"/>
+                                                <TextBlock Text="{Binding Inventory}" Style="{StaticResource ItemTextblock}"
+                                                           FontSize="20" Foreground="{Binding InventoryColor}" FontWeight="Bold"/>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal" Margin="10 12 0 0">
+                                                <Image Source="/Assets/address.png" Height="30"/>
+                                                <TextBlock Text="{Binding Addr}" Style="{StaticResource ItemTextblock}"
+                                                           FontSize="16" Width="460" TextWrapping="Wrap"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Border>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+                <TextBlock Text="{Binding TbAddressGuideText}" 
+                           HorizontalAlignment="Center" VerticalAlignment="Center"
+                           Foreground="Gray" FontWeight="Bold" FontSize="30" 
+                           Visibility="{Binding TbAddressGuideVisibility, Converter={StaticResource boolToVisibility}}"/>
+                <loadin:LoadingIndicator Grid.RowSpan="2"
+                                     SpeedRatio="1" IsActive="{Binding ProgressRingActivated}" 
+                                     Foreground="RoyalBlue"
+                                     Style="{DynamicResource LoadingIndicatorWaveStyle}"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>
